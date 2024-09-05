@@ -1,0 +1,117 @@
+[gd_scene load_steps=10 format=3 uid="uid://b502tieu4dsv"]
+
+[ext_resource type="Script" path="res://Test rock.gd" id="1_376gh"]
+[ext_resource type="Texture2D" uid="uid://c4f7hk2g0siiv" path="res://Asset's/texture.png" id="1_ubsg8"]
+[ext_resource type="Texture2D" uid="uid://q13a8s23yyjo" path="res://Asset's/asset.png" id="2_aovha"]
+[ext_resource type="Texture2D" uid="uid://caq7cnqox0f8c" path="res://Asset's/3.png" id="3_sfg3p"]
+[ext_resource type="Texture2D" uid="uid://cgqyyrcmht4iv" path="res://Asset's/2.png" id="4_t38ld"]
+
+[sub_resource type="Animation" id="Animation_54pi3"]
+resource_name = "Appear"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_1ve08"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_71ato"]
+resource_name = "new_animation"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kx573"]
+_data = {
+"Appear": SubResource("Animation_54pi3"),
+"RESET": SubResource("Animation_1ve08"),
+"new_animation": SubResource("Animation_71ato")
+}
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_376gh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(518, 132)
+scale = Vector2(1.84456, 2.09485)
+texture = ExtResource("1_ubsg8")
+hframes = 3
+
+[node name="Dis" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_kx573")
+}
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="Buttons" type="Node2D" parent="Node2D"]
+
+[node name="Paper" type="TextureButton" parent="Node2D/Buttons"]
+offset_left = 388.0
+offset_top = 299.0
+offset_right = 452.0
+offset_bottom = 363.0
+texture_normal = ExtResource("2_aovha")
+
+[node name="Scisor" type="TextureButton" parent="Node2D/Buttons"]
+offset_left = 516.0
+offset_top = 302.0
+offset_right = 580.0
+offset_bottom = 366.0
+texture_normal = ExtResource("3_sfg3p")
+
+[node name="Rock" type="TextureButton" parent="Node2D/Buttons"]
+offset_left = 645.0
+offset_top = 304.0
+offset_right = 709.0
+offset_bottom = 368.0
+texture_normal = ExtResource("4_t38ld")
+
+[node name="Text" type="Label" parent="Node2D"]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="Button" type="Button" parent="Node2D"]
+offset_left = 521.0
+offset_top = 398.0
+offset_right = 596.0
+offset_bottom = 429.0
+text = "AGAIN
+"
+
+[connection signal="pressed" from="Node2D/Buttons/Paper" to="." method="_on_paper_pressed"]
+[connection signal="pressed" from="Node2D/Buttons/Scisor" to="." method="_on_scisor_pressed"]
+[connection signal="pressed" from="Node2D/Buttons/Rock" to="." method="_on_rock_pressed"]
+[connection signal="pressed" from="Node2D/Button" to="." method="_on_button_pressed"]
